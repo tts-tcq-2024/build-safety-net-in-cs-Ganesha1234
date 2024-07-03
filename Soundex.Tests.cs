@@ -14,5 +14,53 @@ public class SoundexTests
         Assert.Equal("A000", Soundex.GenerateSoundex("A"));
     }
 
-   
+    [Fact]
+    public void HandlesSingleCharacter1()
+    {
+        Assert.Equal("R163", Soundex.GenerateSoundex("Robert"));
+    }
+    
+    [Fact]
+    public void HandlesSingleCharacter2()
+    {
+        Assert.Equal("S250", Soundex.GenerateSoundex("Susan"));
+    }
+
+    [Fact]
+    public void HandlesSingleCharacter3()
+    {
+        Assert.Equal("J530", Soundex.GenerateSoundex("John-Doe"));
+    }
+
+
+    [Fact]
+    public void HandlesSingleCharacter3()
+    {
+        Assert.Equal("A420", Soundex.GenerateSoundex("alice"));
+    }
+
+    [Fact]
+    public void HandlesSingleCharacter3()
+    {
+        Assert.Equal("A350", Soundex.GenerateSoundex("Adam"));
+    }
+
+    [Fact]
+    public void HandlesSingleCharacter3()
+    {
+        Assert.Equal("C623", Soundex.GenerateSoundex("Christopher"));
+    }
+
+    [Fact]
+    public void HandlesSingleCharacter3()
+    {
+        Assert.Equal("A020", Soundex.GenerateSoundex("abcdefghijklmnopqrstuvwxyz"));
+    }
+    
+     [Fact]
+    public void HandlesSingleCharacter3()
+    {
+        Assert.Equal("J500", Soundex.GenerateSoundex("Jane123"));
+    }   
+    
 }
