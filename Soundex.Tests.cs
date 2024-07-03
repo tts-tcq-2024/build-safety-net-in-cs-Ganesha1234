@@ -54,7 +54,7 @@ public class SoundexTests
     [Fact]
     public void HandlesSingleCharacter7()
     {
-        Assert.Equal("A020", Soundex.GenerateSoundex("abcdefghijklmnopqrstuvwxyz"));
+        Assert.Equal("A123", Soundex.GenerateSoundex("abcdefghijklmnopqrstuvwxyz"));
     }
     
      [Fact]
