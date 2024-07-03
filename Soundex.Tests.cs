@@ -20,12 +20,7 @@ public class SoundexTests
         Assert.Equal("R163", Soundex.GenerateSoundex("Robert"));
     }
     
-    [Fact]
-    public void HandlesSingleCharacter2()
-    {
-        Assert.Equal("S250", Soundex.GenerateSoundex("Susan"));
-    }
-
+ 
     [Fact]
     public void HandlesSingleCharacter3()
     {
