@@ -29,7 +29,7 @@ public class SoundexTests
 
 
     [Fact]
-    public void HandlesWithlowercaseCharacters.()
+    public void HandlesWithlowercaseCharacters()
     {
         Assert.Equal("A420", Soundex.GenerateSoundex("alice"));
     }
@@ -41,7 +41,7 @@ public class SoundexTests
     }
 
     [Fact]
-    public void HandlesWithMoreThan_4_Characters6()
+    public void HandlesWithMoreThan_4_Characters()
     {
         Assert.Equal("C623", Soundex.GenerateSoundex("Christopher"));
     }
