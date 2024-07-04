@@ -15,45 +15,45 @@ public class SoundexTests
     }
 
     [Fact]
-    public void HandlesSingleCharacter1()
+    public void HandlesMultipleConsonantsAndVowels()
     {
         Assert.Equal("R163", Soundex.GenerateSoundex("Robert"));
     }
     
  
     [Fact]
-    public void HandlesSingleCharacter3()
+    public void HandlesSpecialCharacters()
     {
         Assert.Equal("J530", Soundex.GenerateSoundex("John-Doe"));
     }
 
 
     [Fact]
-    public void HandlesSingleCharacter4()
+    public void HandlesWithlowercaseCharacters.()
     {
         Assert.Equal("A420", Soundex.GenerateSoundex("alice"));
     }
 
     [Fact]
-    public void HandlesSingleCharacter5()
+    public void HandlesWithExactly_4_Characters()
     {
         Assert.Equal("A350", Soundex.GenerateSoundex("Adam"));
     }
 
     [Fact]
-    public void HandlesSingleCharacter6()
+    public void HandlesWithMoreThan_4_Characters6()
     {
         Assert.Equal("C623", Soundex.GenerateSoundex("Christopher"));
     }
 
     [Fact]
-    public void HandlesSingleCharacter7()
+    public void HandlesLongString()
     {
         Assert.Equal("A123", Soundex.GenerateSoundex("abcdefghijklmnopqrstuvwxyz"));
     }
     
      [Fact]
-    public void HandlesSingleCharacter8()
+    public void HandlesBothCharAndDigit()
     {
         Assert.Equal("J500", Soundex.GenerateSoundex("Jane123"));
     }   
