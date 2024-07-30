@@ -3,41 +3,49 @@ using System.Text;
 
 public class Soundex
 {
-    public static string GenerateSoundex(string name)
+    public static string GenerateSoundexCode(string name)
     {
-        if (string.IsNullOrEmpty(name)) return string.Empty;
+        if (string.IsNullOrWhiteSpace(name)) // Decision point
+        {
+            return string.Empty;
+        }
 
         var soundex = new StringBuilder();
         soundex.Append(char.ToUpper(name[0]));
 
-        char prevCode = GetSoundexCode(name[0]);
+        char previousCode = GetSoundexCodeForCharacter(name[0]);
 
-        // Append characters and get soundex code
-        AppendSoundexCharacters(name, soundex, ref prevCode);
+        AddSoundexCharacters(name.Substring(1), soundex, ref previousCode);
 
-        // Pad to ensure length of 4
-        soundex.Append('0', 4 - soundex.Length);
+        soundex.Append('0', 4 - soundex.Length); // Padding to ensure length
 
         return soundex.ToString();
     }
 
-    private static void AppendSoundexCharacters(string name, StringBuilder soundex, ref char prevCode)
+    private static void AddSoundexCharacters(string name, StringBuilder soundex, ref char previousCode)
     {
-        foreach (char character in name.Substring(1))
+        foreach (char character in name) // Iterates over each character
         {
-            if (!char.IsLetter(character)) continue;
-
-            char code = GetSoundexCode(character);
-            if (code != '0' && code != prevCode)
+            if (char.IsLetter(character)) // Decision point
             {
-                soundex.Append(code);
-                prevCode = code;
+                AddCodeIfRequired(character, soundex, ref previousCode);
             }
         }
     }
 
-    private static char GetSoundexCode(char character) =>
-        character switch
+    private static void AddCodeIfRequired(char character, StringBuilder soundex, ref char previousCode)
+    {
+        char code = GetSoundexCodeForCharacter(character);
+        if (code != '0' && code != previousCode) // Decision point
+        {
+            soundex.Append(code);
+            previousCode = code;
+        }
+    }
+
+    private static char GetSoundexCodeForCharacter(char character)
+    {
+        return char.ToUpper(character) switch // Decision point
         {
             'B' or 'F' or 'P' or 'V' => '1',
             'C' or 'G' or 'J' or 'K' or 'Q' or 'S' or 'X' or 'Z' => '2',
@@ -47,4 +55,5 @@ public class Soundex
             'R' => '6',
             _ => '0'
         };
+    }
 }
