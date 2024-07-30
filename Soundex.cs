@@ -5,52 +5,46 @@ public class Soundex
 {
     public static string GenerateSoundex(string name)
     {
-        if (string.IsNullOrWhiteSpace(name)) // Check for null or empty input
-        {
-            return string.Empty;
-        }
+        if (string.IsNullOrEmpty(name)) return string.Empty; // 1 decision point
 
         var soundex = new StringBuilder();
         soundex.Append(char.ToUpper(name[0]));
 
-        char previousCode = GetSoundexCodeForCharacter(name[0]);
+        char prevCode = GetSoundexCode(name[0]);
 
-        AddSoundexCharacters(name.Substring(1), soundex, ref previousCode);
+        AppendSoundexCharacters(name.Substring(1), soundex, ref prevCode);
 
-        // Ensure the Soundex code is exactly 4 characters long
-        int paddingLength = 4 - soundex.Length;
-        if (paddingLength > 0)
-        {
-            soundex.Append('0', paddingLength);
-        }
-
-        return soundex.ToString();
+        return soundex.ToString().PadRight(4, '0').Substring(0, 4); // No new decision points
     }
 
-    private static void AddSoundexCharacters(string name, StringBuilder soundex, ref char previousCode)
+    private static void AppendSoundexCharacters(string name, StringBuilder soundex, ref char prevCode)
     {
-        foreach (char character in name) // Iterate over each character in the name
+        foreach (char character in name) // 1 decision point for loop
         {
-            if (char.IsLetter(character)) // Process only letter characters
+            if (char.IsLetter(character)) // 1 decision point
             {
-                AddCodeIfRequired(character, soundex, ref previousCode);
+                AppendCodeIfNeeded(character, soundex, ref prevCode);
+            }
+
+            if (soundex.Length >= 4) // 1 decision point
+            {
+                break; // Exits the loop
             }
         }
     }
 
-    private static void AddCodeIfRequired(char character, StringBuilder soundex, ref char previousCode)
+    private static void AppendCodeIfNeeded(char character, StringBuilder soundex, ref char prevCode)
     {
-        char code = GetSoundexCodeForCharacter(character);
-        if (code != '0' && code != previousCode) // Append code if it is different from the previous code
+        char code = GetSoundexCode(character);
+        if (code != '0' && code != prevCode) // 1 decision point
         {
             soundex.Append(code);
-            previousCode = code;
+            prevCode = code;
         }
     }
 
-    private static char GetSoundexCodeForCharacter(char character)
-    {
-        return char.ToUpper(character) switch // Determine Soundex code based on the character
+    private static char GetSoundexCode(char character) =>
+        character switch // 1 decision point
         {
             'B' or 'F' or 'P' or 'V' => '1',
             'C' or 'G' or 'J' or 'K' or 'Q' or 'S' or 'X' or 'Z' => '2',
@@ -60,5 +54,4 @@ public class Soundex
             'R' => '6',
             _ => '0'
         };
-    }
 }
