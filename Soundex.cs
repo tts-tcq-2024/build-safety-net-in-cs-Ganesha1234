@@ -22,17 +22,15 @@ public class Soundex
         return soundex.ToString().PadRight(4, '0').Substring(0, 4);
     }
 
-    private static void AppendSoundexCode(char character, StringBuilder soundex, ref char prevCode)
+   private static void AppendSoundexCode(char character, StringBuilder soundex, ref char prevCode)
     {
-        if (char.IsLetter(character))
-        {
-            char code = GetSoundexCode(character);
-            if (code != '0' && code != prevCode)
-            {
-                soundex.Append(code);
-                prevCode = code;
-            }
-        }
+        if (!char.IsLetter(character)) return;
+    
+        char code = GetSoundexCode(character);
+        if (code == '0' || code == prevCode) return;
+    
+        soundex.Append(code);
+        prevCode = code;
     }
 
     private static char GetSoundexCode(char character)
