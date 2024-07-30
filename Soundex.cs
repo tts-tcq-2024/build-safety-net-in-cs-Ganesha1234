@@ -15,14 +15,14 @@ public class Soundex
         // Append soundex codes based on the name
         foreach (char character in name.Substring(1))
         {
-            AppendSoundexCode(character, soundex, ref prevCode);
+            AppendSoundexCode1(character, soundex, ref prevCode);
         }
 
         // Ensure the soundex code length is exactly 4
         return soundex.ToString().PadRight(4, '0').Substring(0, 4);
     }
 
-   private static void AppendSoundexCode(char character, StringBuilder soundex, ref char prevCode)
+   private static void AppendSoundexCode1(char character, StringBuilder soundex, ref char prevCode)
     {
         if (!char.IsLetter(character)) return;
     
