@@ -16,4 +16,4 @@ public class SoundexTests
     {
         Assert.Equal(expected, Soundex.GenerateSoundex(input));
     }
-}
+} 
