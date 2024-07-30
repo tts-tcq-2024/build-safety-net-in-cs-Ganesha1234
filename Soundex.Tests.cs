@@ -2,60 +2,18 @@ using Xunit;
 
 public class SoundexTests
 {
-    [Fact]
-    public void HandlesEmptyString()
+    [Theory]
+    [InlineData("", "")]
+    [InlineData("A", "A000")]
+    [InlineData("Robert", "R163")]
+    [InlineData("John-Doe", "J530")]
+    [InlineData("alice", "A420")]
+    [InlineData("Adam", "A350")]
+    [InlineData("Christopher", "C623")]
+    [InlineData("abcdefghijklmnopqrstuvwxyz", "A123")]
+    [InlineData("Jane123", "J500")]
+    public void GenerateSoundexTests(string input, string expected)
     {
-        Assert.Equal(string.Empty, Soundex.GenerateSoundex(""));
+        Assert.Equal(expected, Soundex.GenerateSoundex(input));
     }
-
-    [Fact]
-    public void HandlesSingleCharacter()
-    {
-        Assert.Equal("A000", Soundex.GenerateSoundex("A"));
-    }
-
-    [Fact]
-    public void HandlesMultipleConsonantsAndVowels()
-    {
-        Assert.Equal("R163", Soundex.GenerateSoundex("Robert"));
-    }
-    
- 
-    [Fact]
-    public void HandlesSpecialCharacters()
-    {
-        Assert.Equal("J530", Soundex.GenerateSoundex("John-Doe"));
-    }
-
-
-    [Fact]
-    public void HandlesWithlowercaseCharacters()
-    {
-        Assert.Equal("A420", Soundex.GenerateSoundex("alice"));
-    }
-
-    [Fact]
-    public void HandlesWithExactly_4_Characters()
-    {
-        Assert.Equal("A350", Soundex.GenerateSoundex("Adam"));
-    }
-
-    [Fact]
-    public void HandlesWithMoreThan_4_Characters()
-    {
-        Assert.Equal("C623", Soundex.GenerateSoundex("Christopher"));
-    }
-
-    [Fact]
-    public void HandlesLongString()
-    {
-        Assert.Equal("A123", Soundex.GenerateSoundex("abcdefghijklmnopqrstuvwxyz"));
-    }
-    
-     [Fact]
-    public void HandlesBothCharAndDigit()
-    {
-        Assert.Equal("J500", Soundex.GenerateSoundex("Jane123"));
-    }   
-    
 }
