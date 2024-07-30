@@ -9,28 +9,31 @@ public class Soundex
 
         var soundex = new StringBuilder();
         soundex.Append(char.ToUpper(name[0]));
-
+        Console.WriteLine("1 :" + soundex);
         char prevCode = GetSoundexCode(name[0]);
-
+        Console.WriteLine("5 :" + soundex);
         // Append soundex codes based on the name
         foreach (char character in name.Substring(1))
         {
-            AppendSoundexCode1(character, soundex, ref prevCode);
+            Console.WriteLine("5 character :" + character + ",  soundex :" + soundex +", prevCode :" + prevCode);
+           
+            AppendSoundexCode(character, soundex, ref prevCode);
         }
+         
 
-        // Ensure the soundex code length is exactly 4
-        return soundex.ToString().PadRight(4, '0').Substring(0, 4);
+        return soundex.ToString().PadRight(4, '0').Substring(0, 4);  
     }
 
-   private static void AppendSoundexCode1(char character, StringBuilder soundex, ref char prevCode)
+    private static void AppendSoundexCode(char character, StringBuilder soundex, ref char prevCode)
     {
         if (!char.IsLetter(character)) return;
-    
+
         char code = GetSoundexCode(character);
-        if (code == '0' || code == prevCode) return;
-    
-        soundex.Append(code);
-        prevCode = code;
+        if (code != '0' && code != prevCode)
+        {
+            soundex.Append(code);
+            prevCode = code;
+        }
     }
 
     private static char GetSoundexCode(char character)
