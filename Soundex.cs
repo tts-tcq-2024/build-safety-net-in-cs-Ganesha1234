@@ -3,7 +3,7 @@ using System.Text;
 
 public class Soundex
 {
-    public static string GenerateSoundexCode(string name)
+    public static string GenerateSoundex(string name)
     {
         if (string.IsNullOrWhiteSpace(name)) // Decision point
         {
