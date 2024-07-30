@@ -1,6 +1,6 @@
 using System;
 using System.Text;
-
+using System.Collections.Generic;
 public class Soundex
 {
     public static string GenerateSoundex(string name)
@@ -35,18 +35,19 @@ public class Soundex
     
     private static bool AppendCode(char code, char prevCode) => code != '0' && code != prevCode;
     
-    private static char GetSoundexCode(char character)
+    private static char GetSoundexCode(char c)
     {
-        character = char.ToUpper(character);
-        return character switch
+        c = char.ToUpper(c);
+        Dictionary<char, char> mapping = new Dictionary<char, char>
         {
-            'B' or 'F' or 'P' or 'V' => '1',
-            'C' or 'G' or 'J' or 'K' or 'Q' or 'S' or 'X' or 'Z' => '2',
-            'D' or 'T' => '3',
-            'L' => '4',
-            'M' or 'N' => '5',
-            'R' => '6',
-            _ => '0'
+            {'B', '1'}, {'F', '1'}, {'P', '1'}, {'V', '1'},
+            {'C', '2'}, {'G', '2'}, {'J', '2'}, {'K', '2'}, {'Q', '2'}, {'S', '2'}, {'X', '2'}, {'Z', '2'},
+            {'D', '3'}, {'T', '3'},
+            {'L', '4'},
+            {'M', '5'}, {'N', '5'},
+            {'R', '6'}
         };
+    
+        return mapping.ContainsKey(c) ? mapping[c] : '0';
     }
 }
